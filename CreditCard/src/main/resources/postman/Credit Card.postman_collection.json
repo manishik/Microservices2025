@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "82106865-f474-4934-bbb8-82b8f90d24d1",
+		"name": "Credit Card",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "368939"
+	},
+	"item": [
+		{
+			"name": "ValidateCC",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/validate/creditCard/4567890153451111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate",
+						"creditCard",
+						"4567890153451111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCC",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ccName\": \"HDFC\",\n    \"ccNumber\": 4567890153451111,\n    \"ccType\": \"Visa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/CrudCC/createCC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CrudCC",
+						"createCC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCCbyId",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/CrudCC/getCCbyId/1234567890123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"CrudCC",
+						"getCCbyId",
+						"1234567890123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListAllCC",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:6060/CrudCC/listAllCC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6060",
+					"path": [
+						"CrudCC",
+						"listAllCC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCC",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/CrudCC/delCC/4567890153451111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CrudCC",
+						"delCC",
+						"4567890153451111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCC",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ccName\": \"HDFC\",\n    \"ccNumber\": 4567890153451111,\n    \"ccType\": \"Master\",\n    \"message\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/CrudCC/updateCC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CrudCC",
+						"updateCC"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

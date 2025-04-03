@@ -1,0 +1,20 @@
+1. Keep the Dockerfile in the project root folder
+
+2. Delete the target folder
+Rebuild the Project (after changing app.prop file to point to postgres docker container)
+using Maven clean install
+
+3. Run the below command to build an image
+docker build -t ccvalidationimage .
+
+4. Check the newly created image
+docker images
+
+5. Run the image giving a container name (and exposing the port at 8050) :
+docker run --name ccValidationContainer -p 8020:6060 ccvalidationimage
+
+8020 = is the port where you access rest end points giving URL in postman
+6060 = is the port of spring boot application (application.properties)
+The above command will also start the web application server
+
+Test the application by hitting the rest end point from postman

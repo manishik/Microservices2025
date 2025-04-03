@@ -1,0 +1,2 @@
+To Access swagger UI
+localhost:6060/swagger-ui.html
