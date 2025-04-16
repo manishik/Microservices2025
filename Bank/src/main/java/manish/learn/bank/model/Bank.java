@@ -44,6 +44,7 @@ public class Bank {
     @Column(name = "bankaddress")
     private String bankAddress;
 
+    // One Bank will have Many accounts
     @OneToMany(mappedBy = "bank")
     @JsonManagedReference
     private List<Account> accountList;

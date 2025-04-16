@@ -13,6 +13,8 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
 @Setter
 @Getter
 @Entity
@@ -22,10 +24,14 @@ public class Account {
     public Account() {
     }
 
-    public Account(Long accId, String accountName, String accountType, Bank bank) {
+    public Account(Long accId, String accountName, String accountType, Double amount, Date createDate, Date trasanctionDate, Date endDate, Bank bank) {
         this.accId = accId;
         this.accountName = accountName;
         this.accountType = accountType;
+        this.amount = amount;
+        this.createDate = createDate;
+        this.trasanctionDate = trasanctionDate;
+        this.endDate = endDate;
         this.bank = bank;
     }
 
@@ -39,6 +45,19 @@ public class Account {
     @Column(name = "accounttype")
     private String accountType;
 
+    @Column(name = "amount")
+    private double amount;
+
+    @Column(name = "createdate")
+    private Date createDate;
+
+    @Column(name = "trasanctiondate")
+    private Date trasanctionDate;
+
+    @Column(name = "enddate")
+    private Date endDate;
+
+    // Many Accounts belong to One Bank
     @ManyToOne
     @JoinColumn(name = "bankid")
     @JsonBackReference
