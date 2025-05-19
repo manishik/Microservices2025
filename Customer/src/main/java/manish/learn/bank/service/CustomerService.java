@@ -1,5 +1,6 @@
 package manish.learn.bank.service;
 
+import manish.learn.bank.entities.CustomerAccount;
 import manish.learn.bank.exceptions.CustomerAlreadyExistsException;
 import manish.learn.bank.exceptions.CustomerNotFoundException;
 import manish.learn.bank.model.Customer;
@@ -16,5 +17,7 @@ public interface CustomerService {
 
     public Customer updateCustomer(Customer customer) throws CustomerNotFoundException;
     public Customer deleteCustomer(Long customerId) throws CustomerNotFoundException;
+
+    public CustomerAccount createAccount(CustomerAccount customerAccount);
 
 }

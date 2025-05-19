@@ -1,7 +1,7 @@
 package manish.learn.bank.controllers;
 
 import manish.learn.bank.entities.CustomerAccount;
-import manish.learn.bank.feignClient.AccountRest;
+import manish.learn.bank.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +18,13 @@ public class CustomerAccountController {
     Logger logger = LoggerFactory.getLogger(CustomerAccountController.class);
 
     @Autowired
-    AccountRest accountRest;
+    CustomerService customerService;
 
     @RequestMapping(path = "/createAccountForCustomer", method = RequestMethod.POST)
     public ResponseEntity<CustomerAccount> createAccountForCustomer(@RequestBody CustomerAccount customerAccount) {
-        logger.info("Inside createAccountForCustomer");
-        ResponseEntity<CustomerAccount> addedAccountForCustomer = accountRest.createAccount(customerAccount);
-        return addedAccountForCustomer;
+        logger.info("Inside RestController createAccountForCustomer");
+        CustomerAccount customerAccountResp = customerService.createAccount(customerAccount);
+        return ResponseEntity.ok(customerAccountResp);
     }
 
 }
