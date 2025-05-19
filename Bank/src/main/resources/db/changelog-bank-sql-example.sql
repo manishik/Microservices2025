@@ -1,3 +1,6 @@
+
+DROP TABLE IF EXISTS Bank CASCADE;
+
 CREATE TABLE Bank
 (
     bankid    numeric PRIMARY KEY,
@@ -7,12 +10,6 @@ CREATE TABLE Bank
     bankaddress     varchar(300)
 );
 
-Drop table Bank;
-
-truncate table Bank;
-
-select *
-from Bank;
 
 INSERT INTO Bank (bankid, bankname, bankemail, bankphoneNumber, bankaddress)
 VALUES ('1', 'BoA', 'BoA@BoA.com', '123','Ellicott City MD, USA');
@@ -31,11 +28,3 @@ VALUES ('5', 'Maybank', 'Maybank@Maybank.com', '334','KL, Malaysia');
 
 INSERT INTO Bank (bankid, bankname, bankemail, bankphoneNumber, bankaddress)
 VALUES ('6', 'ICICI', 'ICICI@ICICI.com', '555','Mumbai, India');
-
-delete
-from Bank
-where bankid = '30';
-
-commit;
-
-

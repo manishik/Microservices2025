@@ -3,6 +3,11 @@
 
 DROP TABLE if exists Customer;
 
+CREATE SEQUENCE customer_seq
+    as integer;
+
+ALTER SEQUENCE customer_seq OWNER TO postgres;
+
 CREATE TABLE Customer
 (
     custid    numeric PRIMARY KEY,
