@@ -1,22 +1,6 @@
-CREATE TABLE Customer
-(
-    custid    numeric PRIMARY KEY,
-    custfirstname   varchar(100),
-    custmiddlename  varchar(100),
-    custlastname    varchar(100),
-    custemail       varchar(100),
-    custphonenumber numeric(64),
-    custcellnumber numeric(64),
-    custaddress     varchar(500)
-);
+--liquibase formatted sql
 
-Drop table Customer;
-
-truncate table Customer;
-
-select *
-from Customer;
-
+--changeset liquibase-docs:CustomerInsertion.sql
 INSERT INTO Customer (custid, custfirstname, custmiddlename, custlastname, custemail, custphonenumber, custcellnumber, custaddress)
 VALUES ('1', 'Manish', 'I', 'K', 'Manish@Manish.com', '1', '1', 'Ellicott City, USA');
 
@@ -34,11 +18,3 @@ VALUES ('5', 'Joe', ' ', 'I', 'Joe@Joe.com', '55555', '55555', 'Bogadi Mysore');
 
 INSERT INTO Customer (custid, custfirstname, custmiddlename, custlastname, custemail, custphonenumber, custcellnumber, custaddress)
 VALUES ('33', 'Random', 'I', 'Person', 'Random@person.com', '666666', '666666', 'USA');
-
-delete
-from Customer
-where custid = '3';
-
-commit;
-
-
