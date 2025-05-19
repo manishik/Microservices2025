@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS Bank CASCADE;
 
 CREATE TABLE Bank
@@ -9,7 +8,6 @@ CREATE TABLE Bank
     bankphoneNumber numeric(64),
     bankaddress     varchar(300)
 );
-
 
 INSERT INTO Bank (bankid, bankname, bankemail, bankphoneNumber, bankaddress)
 VALUES ('1', 'BoA', 'BoA@BoA.com', '123','Ellicott City MD, USA');

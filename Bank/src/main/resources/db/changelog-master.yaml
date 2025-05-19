@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
-      file: db/changelog-bank-sql-example.sql
+      file: db/BankSQL.sql
+  - include:
+      file: db/AccountSQL.sql
