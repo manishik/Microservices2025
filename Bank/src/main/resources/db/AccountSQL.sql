@@ -30,3 +30,9 @@ VALUES ('5', 'CitiAccount', 'Savings Account', 4000, '2010-03-03','2011-05-15', 
 
 INSERT INTO Account (accid, accountname, accounttype, amount, createdate, trasanctiondate, enddate, bankid)
 VALUES ('6', 'CitiAccount', 'Checkings Account', 6000, '2010-03-03', '2011-05-15', CAST(null AS date),3);
+
+DROP SEQUENCE IF EXISTS account_seq CASCADE;
+
+CREATE SEQUENCE account_seq AS INTEGER;
+
+ALTER SEQUENCE account_seq OWNER TO postgres;

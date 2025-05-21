@@ -1,10 +1,11 @@
 --liquibase formatted sql
 --changeset liquibase-docs:CustomerCreation.sql
 
-DROP TABLE if exists Customer;
+DROP TABLE IF EXISTS Customer;
 
-CREATE SEQUENCE customer_seq
-    as integer;
+DROP SEQUENCE IF EXISTS customer_seq CASCADE;
+
+CREATE SEQUENCE customer_seq AS INTEGER;
 
 ALTER SEQUENCE customer_seq OWNER TO postgres;
 

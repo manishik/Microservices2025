@@ -36,12 +36,14 @@ public class Account {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
-    @SequenceGenerator(name = "account_seq", sequenceName = "account_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq_gen")
+    @SequenceGenerator(name = "account_seq_gen", sequenceName = "account_seq", allocationSize = 1)
     @Column(name = "accid")
     private Long accId;
+
     @Column(name = "accountname")
     private String accountName;
+
     @Column(name = "accounttype")
     private String accountType;
 
