@@ -6,8 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import jakarta.validation.constraints.NotNull;
 
 @Setter
 @Getter
@@ -34,12 +37,16 @@ public class Customer {
     @Column(name = "custid")
     private Long custId;
 
+    @NotNull (message = "Cannot be null & minimum 2 characters")
+    @Size(min=2, max=80)
     @Column(name = "custfirstname")
     private String custFirstName;
 
     @Column(name = "custmiddlename")
     private String custMiddleName;
 
+    @NotNull(message = "Cannot be null & minimum 2 characters")
+    @Size(min=2, max=80)
     @Column(name = "custlastname")
     private String custLastName;
 

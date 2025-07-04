@@ -1,5 +1,8 @@
-CREATE TABLE CreditCards (
-    ccnumber        numeric  PRIMARY KEY,
+DROP TABLE IF EXISTS CreditCards CASCADE;
+
+CREATE TABLE CreditCards
+(
+    ccnumber        numeric PRIMARY KEY,
     ccname          varchar(100),
     cctype          varchar(100),
     ccexpirydate    date,
@@ -7,12 +10,6 @@ CREATE TABLE CreditCards (
     creditlimit     numeric,
     availablecredit numeric
 );
-
-Drop table CreditCards;
-
-truncate table CreditCards;
-
-select * from CreditCards;
 
 INSERT INTO CreditCards (ccnumber, ccname, cctype, ccexpirydate, cccvv, creditlimit, availablecredit)
 VALUES ('1234567890123456', 'Apple', 'MasterCard', '12/31/2030', 123, 7500, 7500);
@@ -34,6 +31,3 @@ VALUES ('5678901234561234', 'Discover', 'Discover', '12/31/2040', 555, 10000, 10
 
 INSERT INTO CreditCards (ccnumber, ccname, cctype, ccexpirydate, cccvv, creditlimit, availablecredit)
 VALUES ('5678901234564444', 'American Express', 'American Express', '12/31/2035', 666, 20000, 2000);
-
-delete from CreditCards where ccnumber = '123456789012345';
-commit

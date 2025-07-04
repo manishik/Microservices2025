@@ -5,11 +5,11 @@ FROM openjdk:17-jdk-slim
 WORKDIR /usr/app
 
 # Copy the JAR file into the container
-COPY ./target/CCValidation-0.0.1-SNAPSHOT.jar /usr/app/
+COPY ./target/CreditCard.jar /usr/app/
 
-#RUN sh -c 'touch CCValidation-0.0.1-SNAPSHOT.jar'
+#RUN sh -c 'touch CreditCard-0.0.1-SNAPSHOT.jar'
 
-#ENTRYPOINT ["java","-jar","CCValidation-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","CreditCard.jar"]
 
 # Specify the command to run your application
-CMD ["java","-jar","CCValidation-0.0.1-SNAPSHOT.jar"]
+#CMD ["java","-jar","CreditCard.jar"]

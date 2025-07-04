@@ -4,10 +4,10 @@ import manish.learn.bank.entities.CustomerAccount;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(name = "account-service", path = "/account", url = "${account-service.url}")
+@FeignClient(name = "BANKACCOUNT")
 public interface AccountRest {
 
-    @PostMapping(path = "/createAccount")
+    @PostMapping(path = "/account/createAccount")
     public CustomerAccount createAccount(CustomerAccount customerAccount);
 
 }
