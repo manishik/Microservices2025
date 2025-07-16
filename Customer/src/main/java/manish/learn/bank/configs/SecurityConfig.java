@@ -19,7 +19,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfig {
 
     // REMEMBER WORKS fine with Oauth Login with My GitHub Credetials
