@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/customer")
-@CrossOrigin(maxAge = 3600)
+//@CrossOrigin(maxAge = 3600)
 public class CustomerController {
 
     Logger logger = LoggerFactory.getLogger(CustomerController.class);

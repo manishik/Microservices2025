@@ -15,7 +15,7 @@ CREATE TABLE Customer
     custfirstname   varchar(100),
     custmiddlename  varchar(100),
     custlastname    varchar(100),
-    custemail       varchar(100),
+    custemail       varchar(100) unique not null,
     custphonenumber numeric(64),
     custcellnumber numeric(64),
     custaddress     varchar(500)
