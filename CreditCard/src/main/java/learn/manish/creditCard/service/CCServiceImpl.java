@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,19 +27,19 @@ public class CCServiceImpl implements CCService {
     @Autowired
     CCCrudDao ccCrudDao;
 
-    //@Cacheable(value = "AppServiceCCDetails", key = "#ccNo") //ClassCastException is being thrown
-    public CreditCard validateCC(String ccNo) throws Exception {
-        logger.info("Credit Card Number inside validateCC method of CCServiceImpl Layer = {}", ccNo);
+    @Cacheable(cacheNames = {"AppServiceCCDetails"}, key = "#ccNumber")
+    public CreditCard validateCC(String ccNumber) throws Exception {
+        logger.info("Credit Card Number inside validateCC method of CCServiceImpl Layer = {}", ccNumber);
         CreditCard creditCard = new CreditCard();
 
-        if (ccNo.length() < 16 || ccNo.length() > 16) {
+        if (ccNumber.length() < 16 || ccNumber.length() > 16) {
             throw new CCInvalidException("Credit Card number has to be 16 digits");
         }
 
-        if (ccValidateDao.doesCCExistsInDB(ccNo)) {
+        if (ccValidateDao.doesCCExistsInDB(ccNumber)) {
             logger.info("Credit Card number is valid");
             creditCard.setMessage("Credit Card number is valid & in database");
-            creditCard.setCcNumber(ccNo);
+            creditCard.setCcNumber(ccNumber);
             return creditCard;
         } else {
             logger.info("validateCC: Credit Card Number not in database");
@@ -46,7 +47,7 @@ public class CCServiceImpl implements CCService {
         }
     }
 
-    @CachePut(value = "AppServiceCCDetails", key = "#creditCard.ccNumber")
+    @CachePut(cacheNames = {"AppServiceCCDetails"}, key = "#creditCard.ccNumber")
     public int addCC(CreditCard creditCard) throws Exception {
         logger.info("Inside addCC method of CCServiceImpl");
         // Validate of Credit card is already in database
@@ -61,7 +62,7 @@ public class CCServiceImpl implements CCService {
         return 0;
     }
 
-    //@Cacheable(value = "AppServiceCCDetails", key = "#ccNumber") //ClassCastException is being thrown
+    @Cacheable(cacheNames = {"AppServiceCCDetails"}, key = "#ccNumber")
     public CreditCard getCreditCardDetails(String ccNumber) throws CCNotFoundException {
         logger.info("Inside getCC method of CCServiceImpl");
         CreditCard creditCard = ccCrudDao.findCCById(ccNumber);
@@ -77,7 +78,7 @@ public class CCServiceImpl implements CCService {
         return ccCrudDao.getAllCCDetails();
     }
 
-    @CachePut(value = "AppServiceCCDetails", key = "#creditCard.ccNumber")
+    @CachePut(cacheNames = {"AppServiceCCDetails"}, key = "#creditCard.ccNumber")
     public CreditCard modifyCC(CreditCard creditCard) throws Exception {
         logger.info("Inside modifyCC method of CCServiceImpl");
         //CreditCardDetails creditCardDetails1 = validateCC(creditCardDetails.getCcNumber());
@@ -92,7 +93,7 @@ public class CCServiceImpl implements CCService {
         return ccCrudDao.updateCCDetails(creditCard);
     }
 
-    @CacheEvict(value = "AppServiceCCDetails", key = "#ccNumber")
+    @CacheEvict(cacheNames = {"AppServiceCCDetails"}, key = "#ccNumber")
     public int removeCC(String ccNumber) throws Exception {
         logger.info("Inside removeCC method of CCServiceImpl");
         try {
