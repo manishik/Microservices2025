@@ -17,5 +17,6 @@ public interface CustomerMongoService {
     public CustomerMongo updateCustomer(CustomerMongo customer) throws CustomerNotFoundException;
     public void deleteCustomer(Long customerId) throws CustomerNotFoundException;
 
+    public CustomerMongo findCustomerByEmail(String email) throws CustomerNotFoundException;
 
 }

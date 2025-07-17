@@ -30,4 +30,6 @@ public class CustomerMongo {
     private Long custCellPhoneNumber;
 
     private String custAddress;
+
+    private String password;
 }
