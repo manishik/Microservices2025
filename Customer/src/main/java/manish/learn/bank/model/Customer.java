@@ -20,8 +20,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Long custid, String firstName, String middleName, String lastName, String email, Long phoneNumber, Long cellNumber, String address) {
-        this.custId = custid;
+    /*public Customer(String firstName, String middleName, String lastName, String email, Long phoneNumber, Long cellNumber, String address) {
+        //this.custId = custid;
         this.custFirstName = firstName;
         this.custMiddleName = middleName;
         this.custLastName = lastName;
@@ -29,13 +29,17 @@ public class Customer {
         this.custPhoneNumber = phoneNumber;
         this.custCellPhoneNumber = cellNumber;
         this.custAddress = address;
-    }
+    }*/
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
     @SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq", allocationSize = 1)
     @Column(name = "custid")
-    private Long custId;
+    private Long custId;*/
+
+    @Id
+    @Column(name = "custemail")
+    private String custEmail;
 
     @NotNull (message = "Cannot be null & minimum 2 characters")
     @Size(min=2, max=80)
@@ -49,9 +53,6 @@ public class Customer {
     @Size(min=2, max=80)
     @Column(name = "custlastname")
     private String custLastName;
-
-    @Column(name = "custemail")
-    private String custEmail;
 
     @Column(name = "custphonenumber")
     private Long custPhoneNumber;

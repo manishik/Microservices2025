@@ -11,12 +11,12 @@ public interface CustomerService {
 
     public Customer createCustomer(Customer customer) throws CustomerAlreadyExistsException;
 
-    public Customer findCustomerById(Long customerId) throws CustomerNotFoundException;
+    public Customer findCustomerByEmail(String customerEmail) throws CustomerNotFoundException;
     public List<Customer> findAllCustomers() throws Exception;
 
 
     public Customer updateCustomer(Customer customer) throws CustomerNotFoundException;
-    public Customer deleteCustomer(Long customerId) throws CustomerNotFoundException;
+    public Customer deleteCustomerByEmail(String customerEmail) throws CustomerNotFoundException;
 
     public CustomerAccount createAccount(CustomerAccount customerAccount);
 

@@ -1,5 +1,6 @@
 package manish.learn.bank.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import manish.learn.bank.exceptions.CustomerAlreadyExistsException;
 import manish.learn.bank.exceptions.CustomerNotFoundException;
@@ -10,6 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,22 +28,26 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+    @Autowired
+    private ObjectMapper jacksonObjectMapper;
 
     @RequestMapping(path = "/createCustomer", method = RequestMethod.POST)
     public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException {
-        logger.info("CustomerId at CustomerController Layer = {}", customer.getCustId());
+        logger.info("CustomerEmailID at CustomerController Layer = {}", customer.getCustEmail());
         Customer addedCustomer = customerService.createCustomer(customer);
         return new ResponseEntity<>(addedCustomer, HttpStatus.CREATED);
     }
 
-    @RequestMapping(path = "/getCustomerById/{customerIdentityNumber}", method = RequestMethod.GET)
-    public ResponseEntity<?> readCustomerById(@PathVariable("customerIdentityNumber") Long personId) throws CustomerNotFoundException {
+    @RequestMapping(path = "/getCustomerByEmail/{customerEmail}", method = RequestMethod.GET)
+    public ResponseEntity<?> readCustomerByEmail(@PathVariable("customerEmail") String customerEmail) throws CustomerNotFoundException {
         logger.info("Inside readCustomerById method of CustomerController");
-        return new ResponseEntity<>(customerService.findCustomerById(personId), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.findCustomerByEmail(customerEmail), HttpStatus.OK);
     }
 
     @RequestMapping(path = "/listAllCustomers", method = RequestMethod.GET)
     public ResponseEntity<List<Customer>> readAllCustomers() throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        logger.info(jacksonObjectMapper.writeValueAsString(authentication));
         logger.info("Inside readAllCustomers method of CustomerController");
         List<Customer> customerList = customerService.findAllCustomers();
         return new ResponseEntity<>(customerList, HttpStatus.OK);
@@ -51,10 +60,10 @@ public class CustomerController {
         return new ResponseEntity<>(customer1, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/deleteCustomer/{customerId}", method = RequestMethod.DELETE)
-    public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerId") Long customerId) throws CustomerNotFoundException {
+    @RequestMapping(path = "/deleteCustomerByEmail/{customerEmail}", method = RequestMethod.DELETE)
+    public ResponseEntity<Customer> deleteCustomerByEmail(@PathVariable("customerEmail") String customerEmail) throws CustomerNotFoundException {
         logger.info("Inside deleteCustomer method of CustomerController");
-        Customer deletedCustomer = customerService.deleteCustomer(customerId);
+        Customer deletedCustomer = customerService.deleteCustomerByEmail(customerEmail);
         logger.info("Customer successfully deleted from database");
         return new ResponseEntity<>(deletedCustomer, HttpStatus.OK);
     }

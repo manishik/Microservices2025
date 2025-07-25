@@ -65,6 +65,9 @@ public class CCServiceImpl implements CCService {
     @Cacheable(cacheNames = {"AppServiceCCDetails"}, key = "#ccNumber")
     public CreditCard getCreditCardDetails(String ccNumber) throws CCNotFoundException {
         logger.info("Inside getCC method of CCServiceImpl");
+
+        simulateSlowService(); // simulate a slow DB call
+
         CreditCard creditCard = ccCrudDao.findCCById(ccNumber);
         if (creditCard != null) {
             creditCard.setMessage("Credit Card Number found in database");
@@ -105,6 +108,14 @@ public class CCServiceImpl implements CCService {
         //Credit card exists in database, so go ahead and delete the credit card
         logger.info("Credit card number exists in database, Deleting Credit Card Number");
         return ccCrudDao.deleteCC(ccNumber);
+    }
+
+    private void simulateSlowService() {
+        try {
+            Thread.sleep(3000L);
+        } catch (InterruptedException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
 }

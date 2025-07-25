@@ -11,11 +11,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class AppConfig {
-    @SuppressWarnings("deprecation")
-    @Bean
+    //@SuppressWarnings("deprecation")
+    /*@Bean
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(
                         authorize -> authorize.requestMatchers("/api/**")
@@ -30,6 +30,6 @@ public class AppConfig {
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
+    }*/
 
 }

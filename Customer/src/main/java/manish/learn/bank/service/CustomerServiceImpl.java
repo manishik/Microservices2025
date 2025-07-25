@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     AccountRest accountRest;
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Throwable.class })
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Throwable.class})
     public Customer createCustomer(Customer customer) throws CustomerAlreadyExistsException {
         Customer customer1 = customerRepository.save(customer);
         customerRepository.flush();
@@ -35,8 +35,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
-    public Customer findCustomerById(Long customerId) throws CustomerNotFoundException {
-        Customer customer1 =  customerRepository.findCustomerByCustId(customerId);
+    public Customer findCustomerByEmail(String customerEmail) throws CustomerNotFoundException {
+        Customer customer1 = customerRepository.findCustomerByCustEmail(customerEmail);
         return customer1;
     }
 
@@ -44,17 +44,15 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findAll();
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Throwable.class })
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Throwable.class})
     public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
         return customerRepository.save(customer);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Throwable.class })
-    public Customer deleteCustomer(Long customerId) {
-        Customer customer = new Customer();
-        customer.setCustId(customerId);
-        customerRepository.deleteById(customerId);
-        return customer;
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Throwable.class})
+    public Customer deleteCustomerByEmail(String customerEmail) {
+        return customerRepository.deleteCustomerByCustEmail(customerEmail);
+        //return customer;
     }
 
     @CircuitBreaker(name = "createAccountCircuitBreaker", fallbackMethod = "createAccountFallback")
