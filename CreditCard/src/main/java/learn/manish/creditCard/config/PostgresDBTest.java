@@ -18,7 +18,7 @@ public class PostgresDBTest {
         System.out.println("Postgres JDBC Driver Registered!");
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5433/postgres", "postgres", "mysecretpassword");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "MySecretpassword");
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
             e.printStackTrace();
