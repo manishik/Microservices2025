@@ -21,8 +21,8 @@ public class CustomerMongoController {
 
     Logger logger = LoggerFactory.getLogger(CustomerMongoController.class);
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    /*@Autowired
+    PasswordEncoder passwordEncoder;*/
 
     @Autowired
     CustomerMongoService customerMongoService;
@@ -82,10 +82,10 @@ public class CustomerMongoController {
         }
 
         // Verify the password
-        if (!passwordEncoder.matches(password, customerMongo.getPassword())) {
+        /*if (!passwordEncoder.matches(password, customerMongo.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("Invalid email or password");
-        }
+        }*/
 
         // You can generate a token here and return it as part of the response
         // For simplicity, let's just return a success message for now

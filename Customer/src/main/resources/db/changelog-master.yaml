@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/scripts/CustomerCreation.sql
+  - include:
+      file: db/scripts/CustomerInsertion.sql
+  - include:
+      file: db/scripts/CustomerAddress.sql

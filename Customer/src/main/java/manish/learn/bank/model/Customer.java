@@ -2,15 +2,15 @@ package manish.learn.bank.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.validation.constraints.Min;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -19,23 +19,6 @@ public class Customer {
 
     public Customer() {
     }
-
-    /*public Customer(String firstName, String middleName, String lastName, String email, Long phoneNumber, Long cellNumber, String address) {
-        //this.custId = custid;
-        this.custFirstName = firstName;
-        this.custMiddleName = middleName;
-        this.custLastName = lastName;
-        this.custEmail = email;
-        this.custPhoneNumber = phoneNumber;
-        this.custCellPhoneNumber = cellNumber;
-        this.custAddress = address;
-    }*/
-
-    /*@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
-    @SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq", allocationSize = 1)
-    @Column(name = "custid")
-    private Long custId;*/
 
     @Id
     @Column(name = "custemail")
@@ -60,6 +43,10 @@ public class Customer {
     @Column(name = "custcellnumber")
     private Long custCellPhoneNumber;
 
-    @Column(name = "custaddress")
-    private String custAddress;
+    /*@Column(name = "custaddress")
+    private String custAddress;*/
+
+    @OneToMany
+    @JoinColumn(name = "customeremail")
+    private List<CustomerAddress> customerAddress;
 }

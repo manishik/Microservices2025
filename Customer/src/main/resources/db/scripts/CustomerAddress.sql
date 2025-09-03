@@ -2,17 +2,17 @@ DROP TABLE IF EXISTS customeraddress CASCADE;
 
 CREATE TABLE customeraddress
 (
-    custemail   VARCHAR(255) PRIMARY KEY UNIQUE NOT NULL,
-    doorNo      INTEGER,
-    street1     VARCHAR(255),
-    street2     VARCHAR(255),
-    area        VARCHAR(255),
-    zipCode     INTEGER,
-    state       VARCHAR(100),
-    country     VARCHAR(100),
-    addresstype VARCHAR(50),
-    phonenumber VARCHAR(20),
-    email       VARCHAR(255)
+    customeremail   VARCHAR(255) PRIMARY KEY UNIQUE NOT NULL,
+    doorNo          INTEGER,
+    street1         VARCHAR(255),
+    street2         VARCHAR(255),
+    area            VARCHAR(255),
+    zipCode         INTEGER,
+    state           VARCHAR(100),
+    country         VARCHAR(100),
+    addresstype     VARCHAR(50),
+    phonenumber     VARCHAR(20),
+    email           VARCHAR(255)
 );
 
 INSERT INTO customeraddress

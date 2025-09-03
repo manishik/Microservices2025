@@ -19,15 +19,15 @@ public class CustomerServiceMongoImpl implements CustomerMongoService {
 
     Logger logger = LoggerFactory.getLogger(CustomerServiceMongoImpl.class);
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    /*@Autowired
+    PasswordEncoder passwordEncoder;*/
 
     @Autowired
     private CustomerMongoRepository customerMongoRepository;
 
     @Override
     public CustomerMongo createCustomer(CustomerMongo customerMongo) throws CustomerAlreadyExistsException {
-        customerMongo.setPassword(passwordEncoder.encode(customerMongo.getPassword()));
+        //customerMongo.setPassword(passwordEncoder.encode(customerMongo.getPassword()));
         if(customerMongoRepository.findCustomerByEmail(customerMongo.getCustEmail()) != null) {
             return null;
         }
