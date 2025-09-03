@@ -1,5 +1,6 @@
 package manish.learn.bank.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -43,10 +44,7 @@ public class Customer {
     @Column(name = "custcellnumber")
     private Long custCellPhoneNumber;
 
-    /*@Column(name = "custaddress")
-    private String custAddress;*/
-
-    @OneToMany
-    @JoinColumn(name = "customeremail")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "customer")
     private List<CustomerAddress> customerAddress;
 }
