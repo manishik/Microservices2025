@@ -28,6 +28,7 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+
     @Autowired
     private ObjectMapper jacksonObjectMapper;
 
@@ -51,6 +52,13 @@ public class CustomerController {
         logger.info("Inside readAllCustomers method of CustomerController");
         List<Customer> customerList = customerService.findAllCustomers();
         return new ResponseEntity<>(customerList, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/getAllCustomersCSVFile", method = RequestMethod.GET)
+    public ResponseEntity<?> retrieveAllCustomersInCSVFile() throws Exception {
+        logger.info("Inside retrieveAllCustomersInCSVFile method of CustomerController");
+        byte[] customersZipFileByteArray = customerService.findAllCustomersFromDBAasCSV();
+        return new ResponseEntity<>(customersZipFileByteArray, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/updateCustomer", method = RequestMethod.PUT)

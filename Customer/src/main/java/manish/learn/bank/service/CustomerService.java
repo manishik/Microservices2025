@@ -13,7 +13,7 @@ public interface CustomerService {
 
     public Customer findCustomerByEmail(String customerEmail) throws CustomerNotFoundException;
     public List<Customer> findAllCustomers() throws Exception;
-
+    public byte[] findAllCustomersFromDBAasCSV() throws Exception;
 
     public Customer updateCustomer(Customer customer) throws CustomerNotFoundException;
     public Customer deleteCustomerByEmail(String customerEmail) throws CustomerNotFoundException;

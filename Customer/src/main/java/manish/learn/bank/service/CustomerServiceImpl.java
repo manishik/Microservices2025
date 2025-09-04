@@ -1,6 +1,7 @@
 package manish.learn.bank.service;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import manish.learn.bank.database.CustomerRepo;
 import manish.learn.bank.database.CustomerRepository;
 import manish.learn.bank.entities.CustomerAccount;
 import manish.learn.bank.exceptions.CustomerAlreadyExistsException;
@@ -25,6 +26,9 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
+    private CustomerRepo customerRepo;
+
+    @Autowired
     AccountRest accountRest;
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Throwable.class})
@@ -42,6 +46,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     public List<Customer> findAllCustomers() throws Exception {
         return customerRepository.findAll();
+    }
+
+    public byte[] findAllCustomersFromDBAasCSV() throws Exception {
+        logger.info("Inside findAllCustomersFromDBAasCSV method of CustomerServiceImpl");
+        return customerRepo.findAllCustomersFromDBAasCSV();
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Throwable.class})

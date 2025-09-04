@@ -112,6 +112,13 @@
             <artifactId>liquibase-core</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.12.0</version>
+        </dependency>
+
         <!-- Below version works for Swagger -->
         <!-- localhost:8081/swagger-ui/index.html -->
         <dependency>
