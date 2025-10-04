@@ -44,7 +44,7 @@ public class CustomerRepo {
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(byteArrayOutputStream);
 
         CSVWriter csvWriter = new CSVWriter(outputStreamWriter);
-        CSVWriter csvWriter1 = new CSVWriter(new FileWriter(myPath.toString())); // For checking csv file on local machine
+        CSVWriter csvWriterLocal = new CSVWriter(new FileWriter(myPath.toString())); // For checking csv file on local machine
 
         String[] keyHeaderArray = new String[0];
         if (!listOfMaps.isEmpty()) {
@@ -53,7 +53,8 @@ public class CustomerRepo {
             keyHeaderArray = firstRow.keySet().toArray(new String[firstRow.keySet().size()]);
         }
         csvWriter.writeNext(keyHeaderArray);
-        csvWriter1.writeNext(keyHeaderArray); // For checking csv file on local machine
+        csvWriterLocal.writeNext(keyHeaderArray); // For checking csv file on local machine
+
 
         // Write rows following the header order
         for (Map<String, Object> row : listOfMaps) {
@@ -63,10 +64,10 @@ public class CustomerRepo {
                 values[i] = (v == null) ? "" : v.toString();
             }
             csvWriter.writeNext(values);
-            csvWriter1.writeNext(values); // For checking csv file on local machine
+            csvWriterLocal.writeNext(values); // For checking csv file on local machine
         }
         csvWriter.close();
-        csvWriter1.close(); // For checking csv file on local machine
+        csvWriterLocal.close(); // For checking csv file on local machine
         return byteArrayOutputStream.toByteArray();
     }
 
