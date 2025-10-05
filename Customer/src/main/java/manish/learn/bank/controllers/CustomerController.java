@@ -57,7 +57,7 @@ public class CustomerController {
     @RequestMapping(path = "/getAllCustomersCSVFile", method = RequestMethod.GET)
     public ResponseEntity<?> retrieveAllCustomersInCSVFile() throws Exception {
         logger.info("Inside retrieveAllCustomersInCSVFile method of CustomerController");
-        byte[] customersZipFileByteArray = customerService.findAllCustomersFromDBAasCSV();
+        byte[] customersZipFileByteArray = customerService.findAllCustomersFromDBasCSV();
         return new ResponseEntity<>(customersZipFileByteArray, HttpStatus.OK);
     }
 

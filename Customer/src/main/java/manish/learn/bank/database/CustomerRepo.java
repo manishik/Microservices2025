@@ -24,9 +24,9 @@ public class CustomerRepo {
 
     Logger logger = LoggerFactory.getLogger(CustomerRepo.class);
 
-    public byte[] findAllCustomersFromDBAasCSV() throws Exception {
+    public byte[] findAllCustomersFromDBasCSV() throws Exception {
 
-        logger.info("Inside findAllCustomersFromDBAasCSV method of CustomerRepo");
+        logger.info("Inside findAllCustomersFromDBasCSV method of CustomerRepo");
 
         // For checking csv file on local machine
         String fileName = "/Users/manishkeshav/_Work2025/Microservices2025/Customer/Customers.csv";

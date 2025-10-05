@@ -48,9 +48,9 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findAll();
     }
 
-    public byte[] findAllCustomersFromDBAasCSV() throws Exception {
-        logger.info("Inside findAllCustomersFromDBAasCSV method of CustomerServiceImpl");
-        return customerRepo.findAllCustomersFromDBAasCSV();
+    public byte[] findAllCustomersFromDBasCSV() throws Exception {
+        logger.info("Inside findAllCustomersFromDBasCSV method of CustomerServiceImpl");
+        return customerRepo.findAllCustomersFromDBasCSV();
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Throwable.class})
