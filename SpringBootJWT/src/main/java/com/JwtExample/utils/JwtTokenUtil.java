@@ -17,7 +17,7 @@ import java.util.Date;
 public class JwtTokenUtil {
 
     private final Key secreteKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
-    private static final long EXPIRATION_TIME = 60000; //1 min
+    private static final long EXPIRATION_TIME = 600000; //10 min
 
     public String generateToken(String username) {
         Date nowToday = new Date();
