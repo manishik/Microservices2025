@@ -1,7 +1,7 @@
-package com.JwtExample.controller;
+package learn.manish.controller;
 
-import com.JwtExample.model.TokenReqRes;
-import com.JwtExample.utils.JwtTokenUtil;
+import learn.manish.model.TokenReqRes;
+import learn.manish.utils.JwtTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

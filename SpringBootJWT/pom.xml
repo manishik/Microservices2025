@@ -8,11 +8,11 @@
 		<version>3.1.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.JwtExample</groupId>
-	<artifactId>JwtExample</artifactId>
+	<groupId>learn.manish</groupId>
+	<artifactId>JwtExampleManish</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>JwtExample</name>
-	<description>JwtExample Project for Spring Boot</description>
+	<name>JwtExampleManish</name>
+	<description>JwtExample Manish Project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -53,22 +53,5 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
-
-	<!--<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					&lt;!&ndash;<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>&ndash;&gt;
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>-->
 
 </project>

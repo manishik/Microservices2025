@@ -1,4 +1,4 @@
-package com.JwtExample.utils;
+package learn.manish.utils;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
