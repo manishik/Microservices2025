@@ -5,6 +5,7 @@ import manish.learn.bank.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class CustomerAccountController {
     public ResponseEntity<CustomerAccount> createAccountForCustomer(@RequestBody CustomerAccount customerAccount) {
         logger.info("Inside RestController createAccountForCustomer");
         CustomerAccount customerAccountResp = customerService.createAccount(customerAccount);
-        return ResponseEntity.ok(customerAccountResp);
+        return new ResponseEntity<>(customerAccountResp, HttpStatus.CREATED);
     }
 
 }

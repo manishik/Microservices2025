@@ -1,5 +1,7 @@
 package learn.manish.creditCard.exceptions;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,10 +10,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     // Handles CCInvalidException
     @ExceptionHandler(CCInvalidException.class)
     public ResponseEntity<String> handleCCInvalidException(CCInvalidException ccInvalidException) {
-        return new ResponseEntity<>(ccInvalidException.getMessage(), HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>(ccInvalidException.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     // Handles CCNotFoundException
@@ -28,15 +32,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ClassCastException.class)
     public ResponseEntity<String> handleClassCastException(Exception ex) {
-        ex.printStackTrace();
-        return new ResponseEntity<>("ClassCastException Manissssh....." + ex.getMessage(), HttpStatus.BAD_REQUEST);
+        logger.error("Class cast error", ex);
+        return new ResponseEntity<>("Invalid request data", HttpStatus.BAD_REQUEST);
     }
 
     // Handles generic Exception (fallback)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGlobalException(Exception ex) {
-        ex.printStackTrace();
-        return new ResponseEntity<>("Manish, Stop! Something went wrong: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        logger.error("Unhandled application error", ex);
+        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     // Handles IllegalArgumentException

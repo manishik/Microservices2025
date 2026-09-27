@@ -6,16 +6,18 @@ import java.util.List;
 
 public interface CCService {
 
-    public CreditCard validateCC(String ccNo) throws Exception;
+    CreditCard validateCC(String ccNo);
 
-    public int addCC(CreditCard creditCard) throws Exception;
+    int addCC(CreditCard creditCard);
 
-    public CreditCard getCreditCardDetails(String ccNumber);
+    CreditCard getCreditCardDetails(String ccNumber);
 
-    public List<CreditCard> getAllCC();
+    List<CreditCard> getAllCC();
 
-    public CreditCard modifyCC(CreditCard creditCard) throws Exception;
+    CreditCard modifyCC(CreditCard creditCard);
 
-    public int removeCC(String ccNo) throws Exception;
+    int removeCC(String ccNo);
+
+    void clearCache();
 
 }

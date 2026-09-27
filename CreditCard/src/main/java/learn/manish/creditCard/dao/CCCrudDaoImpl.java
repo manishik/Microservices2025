@@ -1,9 +1,9 @@
 package learn.manish.creditCard.dao;
 
 import learn.manish.creditCard.model.CreditCard;
+import learn.manish.creditCard.exceptions.CCNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,30 +15,24 @@ import java.util.List;
 @Repository
 public class CCCrudDaoImpl implements CCCrudDao {
 
-    Logger logger = LoggerFactory.getLogger(CCCrudDaoImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CCCrudDaoImpl.class);
 
-    private int saveCCmethodCallCounter, findCCByIdmethodCallCounter,
-            getAllCCDetailsmethodCallCounter, modifyCCDetailsmethodCallCounter, removeCCmethodCallCounter = 0;
+    private final JdbcTemplate postgresJdbcTemplateRepo;
 
-    private JdbcTemplate postgresJdbcTemplateRepo;
-
-    @Autowired
-    public void init(DataSource pgDataSource) {
+    public CCCrudDaoImpl(DataSource pgDataSource) {
         this.postgresJdbcTemplateRepo = new JdbcTemplate(pgDataSource);
     }
 
+    @Override
     public int saveCC(CreditCard creditCard) {
-        logger.info("saveCC: CCCrudDaoImpl Layer, CCNumber = {}", creditCard.getCcNumber());
-        saveCCmethodCallCounter++;
-        logger.info("Method saveCC is called " + saveCCmethodCallCounter + " times...");
+        logger.info("Saving credit card in DAO layer: {}", maskCcNumber(creditCard.getCcNumber()));
         return postgresJdbcTemplateRepo.update("INSERT INTO creditcards (ccname, ccnumber, cctype) VALUES(?,?,?)",
-                new Object[]{creditCard.getCcName(), Long.parseLong(creditCard.getCcNumber()), creditCard.getCcType()});
+                creditCard.getCcName(), Long.parseLong(creditCard.getCcNumber()), creditCard.getCcType());
     }
 
+    @Override
     public CreditCard findCCById(String ccNumber) {
-        logger.info("findCCById: CCCrudDaoImpl Layer, CCNumber = {}", ccNumber);
-        findCCByIdmethodCallCounter++;
-        logger.info("Method findCCById is called " + findCCByIdmethodCallCounter + " times...");
+        logger.info("Finding credit card in DAO layer: {}", maskCcNumber(ccNumber));
         try {
             return postgresJdbcTemplateRepo.queryForObject("SELECT * FROM creditcards WHERE ccnumber =?",
                     BeanPropertyRowMapper.newInstance(CreditCard.class), Long.parseLong(ccNumber));
@@ -47,39 +41,36 @@ public class CCCrudDaoImpl implements CCCrudDao {
         }
     }
 
+    @Override
     public List<CreditCard> getAllCCDetails() {
         logger.info("getAllCCDetails: CCCrudDaoImpl Layer");
-        getAllCCDetailsmethodCallCounter++;
-        logger.info("Method getAllCCDetails is called " + getAllCCDetailsmethodCallCounter + " times...");
         return postgresJdbcTemplateRepo.query("SELECT * from creditcards", BeanPropertyRowMapper.newInstance(CreditCard.class));
     }
 
+    @Override
     public CreditCard updateCCDetails(CreditCard creditCard) {
-        logger.info("updateCCDetails: CCCrudDaoImpl Layer..");
-        modifyCCDetailsmethodCallCounter++;
-        logger.info("Method updateCCDetails is called " + modifyCCDetailsmethodCallCounter + " times...");
-        try {
-            CreditCard creditCardFromDB = creditCard;
-            postgresJdbcTemplateRepo.update("UPDATE creditcards SET ccname=?, cctype=? WHERE ccnumber=?",
-                    new Object[]{creditCard.getCcName(), creditCard.getCcType(), Long.parseLong(creditCard.getCcNumber())});
-            creditCardFromDB.setMessage(creditCard.getCcNumber() + " is updated Successfully");
-            return creditCardFromDB;
-        } catch (IncorrectResultSizeDataAccessException e) {
-            return null;
+        logger.info("Updating credit card in DAO layer: {}", maskCcNumber(creditCard.getCcNumber()));
+        int rowsUpdated = postgresJdbcTemplateRepo.update("UPDATE creditcards SET ccname=?, cctype=? WHERE ccnumber=?",
+                creditCard.getCcName(), creditCard.getCcType(), Long.parseLong(creditCard.getCcNumber()));
+
+        if (rowsUpdated == 0) {
+            throw new CCNotFoundException();
         }
+
+        creditCard.setMessage("Credit Card Details Updated Successfully");
+        return creditCard;
     }
 
+    @Override
     public int deleteCC(String ccNumber) {
-        logger.info("deleteCC: CCCrudDaoImpl Layer..");
-        removeCCmethodCallCounter++;
-        logger.info("Method deleteCC is called " + removeCCmethodCallCounter + " times...");
-        try {
-            //CreditCardDetails creditCardDetailsFromDB = creditCardDetails;
-            return postgresJdbcTemplateRepo.update("DELETE FROM creditcards WHERE ccnumber=?", Long.parseLong(ccNumber));
-            //creditCardDetailsFromDB.setMessage(creditCardDetails.getCcNumber() + " is Deleted Successfully");
-            //return creditCardDetailsFromDB;
-        } catch (IncorrectResultSizeDataAccessException e) {
-            return 0;
+        logger.info("Deleting credit card in DAO layer: {}", maskCcNumber(ccNumber));
+        return postgresJdbcTemplateRepo.update("DELETE FROM creditcards WHERE ccnumber=?", Long.parseLong(ccNumber));
+    }
+
+    private static String maskCcNumber(String ccNumber) {
+        if (ccNumber == null || ccNumber.length() < 4) {
+            return "****";
         }
+        return "****" + ccNumber.substring(ccNumber.length() - 4);
     }
 }

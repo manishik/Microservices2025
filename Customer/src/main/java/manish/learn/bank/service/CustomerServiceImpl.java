@@ -4,6 +4,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import manish.learn.bank.database.CustomerRepo;
 import manish.learn.bank.database.CustomerRepository;
 import manish.learn.bank.entities.CustomerAccount;
+import manish.learn.bank.exceptions.BankServiceUnavailableException;
 import manish.learn.bank.exceptions.CustomerAlreadyExistsException;
 import manish.learn.bank.exceptions.CustomerNotFoundException;
 import manish.learn.bank.feignClient.AccountRest;
@@ -73,8 +74,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     // Fallback method must match signature and add Throwable as the last parameter
     public CustomerAccount createAccountFallback(CustomerAccount customerAccount, Throwable throwable) {
-        logger.info("Inside createAccountFallback method...");
-        CustomerAccount customerAccountResponse = customerAccount;
-        return customerAccountResponse;
+        logger.error("Bank service is unavailable. Account was not created.", throwable);
+        throw new BankServiceUnavailableException(
+                "Bank service is currently unavailable. Account was not created.",
+                throwable
+        );
     }
 }

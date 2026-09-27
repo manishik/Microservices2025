@@ -1,6 +1,5 @@
 package manish.learn.bank.service;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import manish.learn.bank.database.CustomerMongoRepository;
 import manish.learn.bank.exceptions.CustomerAlreadyExistsException;
 import manish.learn.bank.exceptions.CustomerNotFoundException;

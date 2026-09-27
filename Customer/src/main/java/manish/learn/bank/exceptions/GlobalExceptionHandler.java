@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(BankServiceUnavailableException.class)
+    public ResponseEntity<String> handleBankServiceUnavailableException(BankServiceUnavailableException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
     // Handles CustomerNotFoundException
     @ExceptionHandler(CustomerNotFoundException.class)
     public ResponseEntity<String> handleCustomerNotAvailableException(CustomerNotFoundException ex) {

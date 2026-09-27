@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface CCCrudDao {
 
-    public int saveCC(CreditCard creditCard);
+    int saveCC(CreditCard creditCard);
 
-    public CreditCard findCCById(String ccNumber);
+    CreditCard findCCById(String ccNumber);
 
-    public List<CreditCard> getAllCCDetails();
+    List<CreditCard> getAllCCDetails();
 
-    public CreditCard updateCCDetails(CreditCard creditCard);
+    CreditCard updateCCDetails(CreditCard creditCard);
 
-    public int deleteCC(String ccNumber);
+    int deleteCC(String ccNumber);
 }
